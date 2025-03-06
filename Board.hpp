@@ -1,5 +1,7 @@
+#pragma once
 #include <iostream>
 #include <string>
+#include "Dice.hpp"
 #include "Player.hpp"
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -7,7 +9,7 @@
 #define RESET "\033[0m" 
 
 using namespace std;
-
+Dice d1;
 class Board {
 public:
     Player p1, p2; // Two players
@@ -67,4 +69,35 @@ public:
     bool checkWin(Player &player) {
         return player.playerposition == 100;
     }
+
+    void pvp(){
+        while (true) {
+        // Player 1
+        cout <<'\n'<<p1.getname()<<"'s turn (press Enter to roll)...";
+        cin.ignore();
+        int roll1 = d1.roll();
+        traverseboard(p1, roll1);
+        displayboard();
+        cout <<'\n'<<p1.getname()<<" rolled: " << roll1 << endl;
+        cout<<'\n'<<p1.getname()<<"'s position is: "<<p1.playerposition<<endl;
+        if (checkWin(p1)) {
+            cout << " Player "<<p1.getname()<<" wins! " << endl;
+            break;
+        }
+
+        // Player Blue's turn
+        cout <<'\n'<<p2.getname()<<"'s turn (press Enter to roll)...";
+        cin.ignore();
+        int roll2 = d1.roll();
+        traverseboard(p2, roll2);
+        displayboard();
+        cout <<'\n'<<p2.getname()<<" rolled: " << roll2 << endl;
+        cout<<'\n'<<p2.getname()<<"'s position is: "<<p2.playerposition<<endl;
+        if (checkWin(p2)) {
+            cout << " Player "<<p2.getname()<<" wins! " << endl;
+            break;
+        }
+    }
+    }
+
 };
