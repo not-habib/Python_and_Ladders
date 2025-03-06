@@ -12,7 +12,6 @@
 using namespace std;
 
 int main() {
-    Dice d1;
     Board b;
 
     cout << "Welcome to Python and Ladders!" << endl;
@@ -25,36 +24,10 @@ int main() {
         b.p1.setname(pl1);
         b.p2.setname(pl2);
         cin.ignore();
-
-    while (true) {
-        // Player 1
-        cout <<'\n'<<b.p1.getname()<<"'s turn (press Enter to roll)...";
-        cin.ignore();
-        int roll1 = d1.roll();
-        b.traverseboard(b.p1, roll1);
-        b.displayboard();
-        cout <<'\n'<<b.p1.getname()<<" rolled: " << roll1 << endl;
-        cout<<'\n'<<b.p1.getname()<<"'s position is: "<<b.p1.playerposition<<endl;
-        if (b.checkWin(b.p1)) {
-            cout << " Player "<<b.p1.getname()<<" wins! " << endl;
-            break;
-        }
-
-        // Player Blue's turn
-        cout <<'\n'<<b.p2.getname()<<"'s turn (press Enter to roll)...";
-        cin.ignore();
-        int roll2 = d1.roll();
-        b.traverseboard(b.p2, roll2);
-        b.displayboard();
-        cout <<'\n'<<b.p2.getname()<<" rolled: " << roll2 << endl;
-        cout<<'\n'<<b.p2.getname()<<"'s position is: "<<b.p2.playerposition<<endl;
-        if (b.checkWin(b.p2)) {
-            cout << " Player "<<b.p2.getname()<<" wins! " << endl;
-            break;
-        }
-    }
+        b.pvp();
+    
     cout<<RESET;
-    cout << "Press Enter to exit...";
+    cout<<"Press Enter to exit...";
     cin.get();
 
     return 0;
