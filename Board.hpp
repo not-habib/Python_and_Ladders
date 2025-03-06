@@ -52,9 +52,17 @@ public:
     }
 
     void traverseboard(Player &player, int roll) {
-        player.playerposition += roll; // Move player
-        if (player.playerposition > 100) player.playerposition = 100; // Cap at 100
+    int needed = 100 - player.playerposition; // Steps needed to reach 100
+
+    if (roll > needed) {
+        cout <<RED<< player.getname() << " rolled a " << roll << ", which is too high! " 
+             << "You need " << needed << " or less to win. Turn skipped.\n" <<RESET;
+        return; // Skip turn
     }
+
+    player.playerposition += roll; // Move player
+    cout <<GREEN<< player.getname() << " moves to position " << player.playerposition << ".\n" <<RESET;
+}
 
     bool checkWin(Player &player) {
         return player.playerposition == 100;
